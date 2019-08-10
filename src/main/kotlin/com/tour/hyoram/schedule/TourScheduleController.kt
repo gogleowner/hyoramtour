@@ -1,0 +1,13 @@
+package com.tour.hyoram.schedule
+
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RestController
+
+@RestController
+class TourScheduleController {
+    @GetMapping("/hello")
+    fun hello(name: String?): String {
+        return "hello ${name ?: ""}"
+    }
+
+}
