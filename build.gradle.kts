@@ -25,20 +25,29 @@ repositories {
 	mavenCentral()
 }
 
+tasks.withType<Test> {
+	useJUnitPlatform()
+}
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("com.google.api-client:google-api-client:1.23.0")
-	implementation("com.google.oauth-client:google-oauth-client-jetty:1.23.0")
-	implementation("com.google.apis:google-api-services-sheets:v4-rev516-1.23.0")
+	implementation("com.google.api-client:google-api-client:1.25.0")
+	implementation("com.google.oauth-client:google-oauth-client-jetty:1.25.0")
+	implementation("com.google.apis:google-api-services-sheets:v4-rev581-1.25.0")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	testImplementation("org.junit.jupiter:junit-jupiter:5.5.1")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(module = "junit")
+	}
 
 	/* oauth는 나중에 고려하기로함..
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
