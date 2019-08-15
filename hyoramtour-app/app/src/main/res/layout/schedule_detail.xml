@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+<!--
+"contents": [
+          {
+            "content": "모스크바 - 로마",
+            "theme": "FLIGHT",
+            "detail": "- 출발 : 09/03(화) 08:35\n- 도착 : 09/03(화) 11:30\n- 항공편 ; SU2402\n\n총 소요시간 : 16시간 45분 (비행시간 : 13시간 25분 , 대기시간 : 03시간 20분)"
+          }
+        ]
+-->
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/scheduleDetailText"
+              android:text="scheduleDetail"
+    />
+
+</LinearLayout>
