@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.constraint.ConstraintLayout-->
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.PlaceholderFragment">
-
-    <!--
-
-    view 이름 : ??
-    비용 : ~~ 유로
-    기억해야할 것 : 로마 교통권 구입, 개인이어폰
-    숙소 :
-    이 안에 Expandable list view
-    오전 오후 저녁
-    -->
 
     <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

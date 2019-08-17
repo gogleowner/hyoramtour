@@ -23,3 +23,6 @@
     - https://console.developers.google.com/apis/api/sheets.googleapis.com/credentials
     - 이 방법을 선택해서 구현해보자.
 
+
+## android references
+- https://android.jlelse.eu/easily-adding-nested-recycler-view-in-android-a7e9f7f04047

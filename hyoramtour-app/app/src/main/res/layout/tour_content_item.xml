@@ -5,21 +5,6 @@
               android:orientation="vertical"
               android:padding="20dp"
               android:id="@+id/tour_content_item">
-<!--
-        "contents": [
-          {
-            "content": "<오전> 오르비에또 이동, 관광",
-            "theme": "TRAIN",
-            "detail": "#로마 테르미니-오르비에또 07:28-08:43/좌석정보알수없음 \n- 플랫폼은 1-2EST. 10분정도 걸어야함 탑승전 티켓펀칭 필수"
-          },
-          {
-            "content": "<오전> 오르비에또 관광",
-            "theme": "FREE",
-            "detail": "#오르비에토에서 할 수 있는 것\n- 산악열차타기\n- 90분 유효버스 푸니쿨라, 1.3유로 (10분마다 수시로 운행)\ntip 마을 푸니쿨라하차장에서 치비타로가는 버스 탈수있음 (평일만) 타는 곳은 학교 안 주차장"
-          }
-        ]
--->
-
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"

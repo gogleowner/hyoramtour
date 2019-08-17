@@ -1,103 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="16dp"
-              android:gravity="center_vertical"
-              android:id="@+id/tour_thing_item">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center_vertical"
+                android:id="@+id/tour_thing_item">
 
-    <!--
-{
-    "day": "5일차",
-    "date": "9/6",
-    "cost": 10.0,
-    "rememberThings": "기차티켓",
-    "room": "9월 03일 – 9월 08일 \n주소 14 Via Enrico Cialdini, 로마, Lazio 00185, 이탈리아\nhttps://www.airbnb.co.kr/rooms/15402806?s=51\n체크인/체크아웃 14:00-22:00/11:00\nTourist tax 3.5/명\nincluded Breakfast ",
-    "dailySchedules": [
-      {
-        "timeUnit": "오전",
-        "contents": [
-          {
-            "content": "오르비에또 이동, 관광",
-            "theme": "TRAIN",
-            "detail": "#로마 테르미니-오르비에또 07:28-08:43/좌석정보알수없음 \n- 플랫폼은 1-2EST. 10분정도 걸어야함 탑승전 티켓펀칭 필수"
-          },
-          {
-            "content": "오르비에또 관광",
-            "theme": "FREE",
-            "detail": "#오르비에토에서 할 수 있는 것\n- 산악열차타기\n- 90분 유효버스 푸니쿨라, 1.3유로 (10분마다 수시로 운행)\ntip 마을 푸니쿨라하차장에서 치비타로가는 버스 탈수있음 (평일만) 타는 곳은 학교 안 주차장"
-          }
-        ]
-      },
-      {
-        "timeUnit": "오후",
-        "contents": [
-          {
-            "content": "시비타 디 반뇨레쪼 이동",
-            "theme": "BUS",
-            "detail": "#오르비에토 - 치비타 (1시간반 소요, 14:05 버스 탑승예정)\n1. 오르비에터도착 후 역 옆가게에서 치비타 욍복티켓(ROUND TRIP) 구입 (4.4유료)\n2. 버스타는 곳은 어떤 허름한 정류장\n3. 티켓파는 곳에서 파는 피자 맛있음"
-          },
-          {
-            "content": "시비타 디 반뇨레쪼 관광",
-            "theme": "FREE",
-            "detail": "천공의 섬 라퓨타의 배경이된 곳\n마을 입장권 5유로\nhttps://m.blog.naver.com/iouhoi/221020077948"
-          },
-          {
-            "content": "오르비에또 이동",
-            "theme": "BUS",
-            "detail": "#치비타 - 오르비에또 (17:25 버스 탑승 예정)"
-          }
-        ]
-      },
-      {
-        "timeUnit": "저녁",
-        "contents": [
-          {
-            "content": "로마 이동",
-            "theme": "TRAIN",
-            "detail": "#오르비에또-로마 테르미니 19:34-20:49/COACH3 SEAT 53,55 "
-          }
-        ]
-      }
-    ]
-  }
-오전
-    오르비에또 이동 관광 TRAIN
-        #로마 테르미니-오르비에또 07:28-08:43/좌석정보알수없음 \n- 플랫폼은 1-2EST. 10분정도 걸어야함 탑승전 티켓펀칭 필수
-    오르비에또 관광 FREE
-        #오르비에토에서 할 수 있는 것\n- 산악열차타기\n- 90분 유효버스 푸니쿨라, 1.3유로 (10분마다 수시로 운행)\ntip 마을 푸니쿨라하차장에서 치비타로가는 버스 탈수있음 (평일만) 타는 곳은 학교 안 주차장
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/theme_image"
+            android:src="@mipmap/ic_launcher"
+            android:contentDescription="theme_image"/>
 
-비용
-    3 유로
-기억해야할 것
-    개인이어폰
-숙소
-    블라블라
-
-    -->
-
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/title"
-              android:textSize="20sp"
-              android:textStyle="bold"
-              android:text="title"
-    />
-
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/thing_description"
-              android:layout_marginLeft="10dp"
-              android:text="description"
-    />
-
-    <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
+    <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/content_recycler_view"
-    />
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/theme_image"
+            android:background="#00ffffff"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true">
 
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/title"
+                      android:textSize="20sp"
+                      android:textStyle="bold"
+                      android:text="title"
+                      android:textColor="#000000"/>
+            <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/content_image"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_alignParentEnd="true"
+                    android:contentDescription="content_image"/>
+        </RelativeLayout>
 
-</LinearLayout>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/thing_description"
+                  android:text="description"
+        />
+
+    </LinearLayout>
+</RelativeLayout>

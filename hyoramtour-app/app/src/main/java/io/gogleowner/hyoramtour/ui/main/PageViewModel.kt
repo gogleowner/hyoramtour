@@ -31,21 +31,17 @@ class PageViewModel : ViewModel() {
 
     fun getTextTourThings() : List<TourThing> {
         return listOf(
-            TourThing("비용", "${schedule.cost}€"),
-            TourThing("기억해야할 것", schedule.rememberThings),
-            TourThing("숙소", schedule.room)
+            TourThing("비용", "${schedule.cost}€", "비용"),
+            TourThing("", schedule.rememberThings, "기억해야할것"),
+            TourThing("숙소", schedule.room, "숙소")
         )
     }
 
     fun getDailyContentsAsTourThings(): List<TourThing> {
-        return getDailyContents().map { TourThing(title = it.content, description = it.detail) }
-    }
-
-    fun getDailyContents(): List<DailySchedule.Content> {
         return schedule.dailySchedules.flatMap { schedule ->
             schedule.contents
                 .filter { it.content.isNotBlank() }
-                .map { it.copy(content = "<${schedule.timeUnit}> ${it.content}") }
+                .map { TourThing(it.content, it.detail, schedule.timeUnit, it.theme.korean) }
         }
     }
 
