@@ -3,6 +3,8 @@ package io.gogleowner.hyoramtour.ui.main
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +16,7 @@ import io.gogleowner.hyoramtour.R
 object SharedData {
     var tourSchedules: List<Schedule> = emptyList()
 
-    fun tabTexts() = tourSchedules.map { "${it.day} (${it.day})" }
+    fun tabTexts() = tourSchedules.map { "${it.day} (${it.date})" }
 }
 
 /**
@@ -39,11 +41,9 @@ class PlaceholderFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_main, container, false)
 
-        val tourThingsListView: ListView = root.findViewById(R.id.tour_things_listview)
-        tourThingsListView.adapter = TourThingsArrayAdapter(context!!, pageViewModel.schedule)
-
-        val tourScheduleExpandableListView: ExpandableListView = root.findViewById(R.id.tour_schedule_expandablelistview)
-        tourScheduleExpandableListView.setAdapter(ScheduleExpandableListViewAdapter(context!!, pageViewModel.schedule.dailySchedules))
+        val tourThingsRecyclerView: RecyclerView = root.findViewById(R.id.tour_things_recycler_view)
+        tourThingsRecyclerView.adapter = TourThingsRecyclerViewAdapter(pageViewModel.getTourThings())
+        tourThingsRecyclerView.layoutManager = LinearLayoutManager(context!!)
 
         return root
     }
