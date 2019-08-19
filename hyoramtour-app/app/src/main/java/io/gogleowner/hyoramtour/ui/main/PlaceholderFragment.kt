@@ -1,15 +1,17 @@
 package io.gogleowner.hyoramtour.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
-import android.widget.ListView
 import com.tour.hyoram.schedule.model.Schedule
 import io.gogleowner.hyoramtour.R
 
@@ -24,6 +26,7 @@ object SharedData {
  */
 class PlaceholderFragment : Fragment() {
     private lateinit var pageViewModel: PageViewModel
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +48,41 @@ class PlaceholderFragment : Fragment() {
         tourThingsRecyclerView.adapter = TourThingsRecyclerViewAdapter(pageViewModel.getTourThings())
         tourThingsRecyclerView.layoutManager = LinearLayoutManager(context!!)
 
+        swipeRefreshLayout = root.findViewById(R.id.swipe_refresh)
+        swipeRefreshLayout.setOnRefreshListener {
+            Log.d("[PlaceholderFragment]", "refresh!!")
+
+            refreshTourSchedules()
+        }
+
         return root
     }
+
+    fun refreshTourSchedules() {
+        Log.i("[PlaceholderFragment]", "initiateRefresh")
+
+        object : AsyncTask<Unit, Unit, String>() {
+            override fun doInBackground(vararg params: Unit?): String {
+                Log.i("[TourScheduleRequest]", "doInBackground")
+                Thread.sleep(2000L)
+
+                return "completed"
+            }
+
+            override fun onPostExecute(result: String?) {
+                Log.i("[TourScheduleRequest]", "completed")
+
+                super.onPostExecute(result)
+                onRefreshComplete()
+            }
+        }.execute()
+    }
+
+    fun onRefreshComplete() {
+        Log.i("[PlaceholderFragment]", "completeRefresh")
+        swipeRefreshLayout.isRefreshing = false
+    }
+
 
     companion object {
         /**
