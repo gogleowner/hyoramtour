@@ -1,6 +1,7 @@
 package io.gogleowner.hyoramtour.ui.main
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,18 @@ import io.gogleowner.hyoramtour.dto.TourThing
 class TourThingsRecyclerViewAdapter(private val tourThings: List<TourThing>)
     : RecyclerView.Adapter<TourThingsRecyclerViewAdapter.TourThingViewHolder>() {
 
+    private val copiedTourThings: MutableList<TourThing>  = mutableListOf()
+
+    init {
+        copiedTourThings.addAll(tourThings)
+    }
+
+    fun updateTourThings(tourThings: List<TourThing>) {
+        copiedTourThings.clear()
+        copiedTourThings.addAll(tourThings)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TourThingViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.tour_things_item, parent, false)
 
@@ -21,7 +34,8 @@ class TourThingsRecyclerViewAdapter(private val tourThings: List<TourThing>)
 
 
     override fun onBindViewHolder(viewHolder: TourThingViewHolder, position: Int) {
-        val tourThing = tourThings[position]
+        val tourThing = copiedTourThings[position]
+        Log.d("TourThingsRecyclerView", tourThing.toString())
 
         if (tourThing.title.isNotBlank()) {
             viewHolder.titleTextView.text = tourThing.title
@@ -41,7 +55,7 @@ class TourThingsRecyclerViewAdapter(private val tourThings: List<TourThing>)
 
 
     override fun getItemCount(): Int {
-        return tourThings.size
+        return copiedTourThings.size
     }
 
 

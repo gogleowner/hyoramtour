@@ -4,6 +4,8 @@ import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.view.PagerAdapter
 import android.util.Log
 
 
@@ -12,7 +14,7 @@ import android.util.Log
  * one of the sections/tabs/pages.
  */
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager)
-    : FragmentPagerAdapter(fm) {
+    : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         // getItem is called to instantiate the fragment for the given page.
@@ -28,5 +30,11 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager)
     override fun getCount(): Int {
         Log.d("[TAB]", "여기냐 설마아아아아아아아아아 ${SharedData.tabTexts().size}")
         return SharedData.tabTexts().size
+    }
+
+
+
+    override fun getItemPosition(`object`: Any): Int {
+        return PagerAdapter.POSITION_NONE
     }
 }
