@@ -1,8 +1,12 @@
 package io.gogleowner.hyoramtour.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.AsyncTask
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -12,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.tour.hyoram.schedule.model.Schedule
@@ -40,8 +45,6 @@ class PlaceholderFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        refreshTourSchedules()
 
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
             val index = arguments?.getInt(ARG_SECTION_NUMBER) ?: 1
@@ -74,7 +77,16 @@ class PlaceholderFragment : Fragment() {
             setOnRefreshListener {
                 Log.d("[PlaceholderFragment]", "refresh!!")
 
-                refreshTourSchedules()
+                val cm = activity!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+
+                if (activeNetwork != null && activeNetwork.isConnected) {
+                    refreshTourSchedules()
+                    Toast.makeText(context, "스케쥴 데이터를 업데이트 했습니다.", Toast.LENGTH_LONG)
+                } else {
+                    Toast.makeText(context, "네트워크에 연결할 수 없습니다.", Toast.LENGTH_LONG)
+                }
+
                 onRefreshComplete()
             }
         }

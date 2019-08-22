@@ -9,10 +9,6 @@ import java.net.URL
 
 open class TourScheduleRequesterAsyncTask : AsyncTask<Unit, Unit, String>() {
 
-    override fun onPreExecute() {
-        Log.i("[TourScheduleRequest]", "실행되는거 맞음/??")
-    }
-
     override fun doInBackground(vararg params: Unit?): String {
         Log.i("[TourScheduleRequest]", "doInBackground")
 //        return URL("http://10.0.2.2:8080/tourSchedules").readText()
@@ -20,8 +16,7 @@ open class TourScheduleRequesterAsyncTask : AsyncTask<Unit, Unit, String>() {
     }
 
     override fun onPostExecute(result: String?) {
-        Log.i("[TourScheduleRequest]", "completed")
-        Log.i("[TourScheduleRequest]", result)
+        Log.i("[TourScheduleRequest]", "onPostExecute")
 
         result?.let {
             Log.i("[TourScheduleRequest]", "스케쥴 데이터 업데이트 ~~")
@@ -29,7 +24,6 @@ open class TourScheduleRequesterAsyncTask : AsyncTask<Unit, Unit, String>() {
             val updatedSchedules: List<Schedule> = jacksonObjectMapper().readValue(it)
 
             SharedData.updateTourSchedules(updatedSchedules)
-
         }
     }
 

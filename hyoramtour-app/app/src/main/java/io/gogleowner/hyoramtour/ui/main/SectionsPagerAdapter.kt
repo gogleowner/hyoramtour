@@ -23,12 +23,10 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager)
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        Log.d("[TAB]", "으아아아ㅏ앙아아아아아아아아 ${SharedData.tabTexts()[position]}")
         return SharedData.tabTexts()[position] // context.resources.getString(TAB_TITLES[position])
     }
 
     override fun getCount(): Int {
-        Log.d("[TAB]", "여기냐 설마아아아아아아아아아 ${SharedData.tabTexts().size}")
         return SharedData.tabTexts().size
     }
 
