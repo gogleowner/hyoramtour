@@ -1,6 +1,14 @@
 # hyoramtour
 이탈리아 여행 일정 보기 앱
 
+## API build & execute
+
+```
+$ gradle build
+$ docker -t gogleowner/hyoramtour-api:{tag} .
+$ docker run -d -p 8080:8080 gogleowner/hyoramtour-api:{tag}
+```
+
 ## TODO
 1. 구글 스프레드 시트 API를 이용하여 시트의 내용을 반환하는 API를 작성해야 하여 튜토리얼을 따라가보자.
     - Google Sheet Api : https://developers.google.com/sheets/api/
@@ -26,3 +34,4 @@
 
 ## android references
 - https://android.jlelse.eu/easily-adding-nested-recycler-view-in-android-a7e9f7f04047
+
