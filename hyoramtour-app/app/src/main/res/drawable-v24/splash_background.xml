@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/bus_background"/>
+    <item android:gravity="center"
+          android:drawable="@drawable/flight_foreground"/>
 </layer-list>
