@@ -15,7 +15,8 @@ open class TourScheduleRequesterAsyncTask : AsyncTask<Unit, Unit, String>() {
 
     override fun doInBackground(vararg params: Unit?): String {
         Log.i("[TourScheduleRequest]", "doInBackground")
-        return URL("http://10.0.2.2:8080/tourSchedules").readText()
+//        return URL("http://10.0.2.2:8080/tourSchedules").readText()
+        return URL("http://35.247.123.71:8080/tourSchedules").readText()
     }
 
     override fun onPostExecute(result: String?) {
@@ -30,8 +31,6 @@ open class TourScheduleRequesterAsyncTask : AsyncTask<Unit, Unit, String>() {
             SharedData.updateTourSchedules(updatedSchedules)
 
         }
-
-        super.onPostExecute(result)
     }
 
 }
