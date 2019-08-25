@@ -40,6 +40,7 @@ dependencies {
 	implementation("com.google.api-client:google-api-client:1.25.0")
 	implementation("com.google.oauth-client:google-oauth-client-jetty:1.25.0")
 	implementation("com.google.apis:google-api-services-sheets:v4-rev581-1.25.0")
+	implementation("com.google.apis:google-api-services-drive:v3-rev173-1.25.0")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
