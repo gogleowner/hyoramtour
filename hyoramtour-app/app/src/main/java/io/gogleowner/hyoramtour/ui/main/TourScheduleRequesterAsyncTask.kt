@@ -5,6 +5,7 @@ import android.util.Log
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.tour.hyoram.schedule.model.Schedule
+import com.tour.hyoram.schedule.model.TourScheduleData
 import java.net.URL
 
 open class TourScheduleRequesterAsyncTask : AsyncTask<Unit, Unit, String>() {
@@ -21,7 +22,7 @@ open class TourScheduleRequesterAsyncTask : AsyncTask<Unit, Unit, String>() {
         result?.let {
             Log.i("[TourScheduleRequest]", "스케쥴 데이터 업데이트 ~~")
 
-            val updatedSchedules: List<Schedule> = jacksonObjectMapper().readValue(it)
+            val updatedSchedules: TourScheduleData = jacksonObjectMapper().readValue(it)
 
             SharedData.updateTourSchedules(updatedSchedules)
         }

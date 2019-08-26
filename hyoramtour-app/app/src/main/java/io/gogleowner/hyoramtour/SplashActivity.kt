@@ -5,9 +5,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Toast
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -39,7 +37,7 @@ class SplashActivity : AppCompatActivity() {
                 SharedData.updateTourSchedules(jacksonObjectMapper().readValue(tourSchedules))
                 moveToMainActivity()
             } else {
-                Toast.makeText(applicationContext, "저장된 캐시 데이터가 없습니다.", Toast.LENGTH_LONG)
+                Toast.makeText(applicationContext, "저장된 캐시 데이터가 없습니다.", Toast.LENGTH_LONG).show()
             }
         }
     }

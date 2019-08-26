@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("tourSchedule", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("tourSchedule", jacksonObjectMapper().writeValueAsString(SharedData.tourSchedules))
+        editor.putString("tourSchedule", jacksonObjectMapper().writeValueAsString(SharedData))
 
         Log.i("MainActivity", "tourSchedule shared prefrences 에 저장 => ${editor.commit()}")
     }

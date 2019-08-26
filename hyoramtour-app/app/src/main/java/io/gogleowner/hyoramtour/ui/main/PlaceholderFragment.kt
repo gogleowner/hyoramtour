@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -13,24 +12,23 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import com.tour.hyoram.schedule.model.Schedule
+import com.tour.hyoram.schedule.model.TourScheduleData
 import io.gogleowner.hyoramtour.R
-import java.net.URL
 
 object SharedData {
     var tourSchedules: MutableList<Schedule> = mutableListOf()
+    var lastModifiedDateTime: String = ""// FIXME 앱 실행되는 region에 따라 파싱하는 DateTime 으로 변경 필요
 
     fun tabTexts() = tourSchedules.map { "${it.day} (${it.date})" }
 
-    fun updateTourSchedules(updatedTourSchedules: List<Schedule>) {
+    fun updateTourSchedules(tourScheduleData: TourScheduleData) {
         tourSchedules.clear()
-        tourSchedules.addAll(updatedTourSchedules)
+        tourSchedules.addAll(tourScheduleData.schedules)
+
+        lastModifiedDateTime = tourScheduleData.lastModifiedDateTime
     }
 }
 
@@ -54,8 +52,8 @@ class PlaceholderFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_main, container, false)
 
@@ -82,9 +80,9 @@ class PlaceholderFragment : Fragment() {
 
                 if (activeNetwork != null && activeNetwork.isConnected) {
                     refreshTourSchedules()
-                    Toast.makeText(context, "스케쥴 데이터를 업데이트 했습니다.", Toast.LENGTH_LONG)
+                    Snackbar.make(view!!, "${SharedData.lastModifiedDateTime} 시간 데이터로 업데이트했습니다.", Snackbar.LENGTH_LONG).show()
                 } else {
-                    Toast.makeText(context, "네트워크에 연결할 수 없습니다.", Toast.LENGTH_LONG)
+                    Snackbar.make(view!!, "네트워크에 연결할 수 없습니다.", Snackbar.LENGTH_LONG).show()
                 }
 
                 onRefreshComplete()

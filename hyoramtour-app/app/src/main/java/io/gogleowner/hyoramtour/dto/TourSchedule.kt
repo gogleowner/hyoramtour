@@ -35,6 +35,9 @@ package com.tour.hyoram.schedule.model
 	}
 ]
  */
+data class TourScheduleData(
+    val schedules: List<Schedule>,
+    val lastModifiedDateTime: String)
 
 data class Schedule(
     val day: String,
