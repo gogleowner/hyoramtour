@@ -20,24 +20,26 @@ class TourScheduleParser {
                     if (row[8].isNotBlank()) row[8] else room
                 } else ""
 
-                schedule = Schedule(row[0], row[1], row[6], row[7], room)
+                schedule = Schedule(row[0], row[1], row[7], room)
 
                 dailySchedule = DailySchedule(row[2])
                 dailySchedule.addContent(row[3], row[4], row[5])
                 schedule.addDailySchedule(dailySchedule)
-
+                schedule.addCost(row[6])
                 parsedSchedules.add(schedule)
             } else {
                 if (schedule == null || dailySchedule == null) {
                     throw RuntimeException("schedule 또는 dailySchedule이 비어있습니다. [$row]")
                 }
 
+                schedule.addCost(row[6])
                 if (row[2].isNotBlank()) {
                     dailySchedule = DailySchedule(row[2])
                     dailySchedule.addContent(row[3], row[4], row[5])
                     schedule.addDailySchedule(dailySchedule)
                 } else {
                     dailySchedule.addContent(row[3], row[4], row[5])
+
                 }
             }
         }

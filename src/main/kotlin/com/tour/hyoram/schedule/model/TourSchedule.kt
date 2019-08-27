@@ -42,17 +42,19 @@ data class TourScheduleData(
 data class Schedule(
     val day: String,
     val date: String,
-    val cost: Double,
     val rememberThings: String,
     val room: String) {
 
-    constructor(day: String, date: String, cost: String, rememberThings: String, room: String) :
-            this(day, date, if (cost.isNotBlank()) cost.toDouble() else 0.0, rememberThings, room)
+    var cost: Double = 0.0
 
     val dailySchedules: MutableList<DailySchedule> = mutableListOf()
 
     fun addDailySchedule(dailySchedule: DailySchedule) {
         dailySchedules.add(dailySchedule)
+    }
+
+    fun addCost(costAsString: String) {
+        cost += if (costAsString.isNotBlank()) costAsString.toDouble() else 0.0
     }
 }
 
