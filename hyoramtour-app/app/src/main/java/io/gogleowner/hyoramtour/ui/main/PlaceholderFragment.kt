@@ -2,9 +2,13 @@ package io.gogleowner.hyoramtour.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.icu.text.SimpleDateFormat
+import android.icu.util.TimeZone
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -17,10 +21,11 @@ import android.view.ViewGroup
 import com.tour.hyoram.schedule.model.Schedule
 import com.tour.hyoram.schedule.model.TourScheduleData
 import io.gogleowner.hyoramtour.R
+import java.util.*
 
 object SharedData {
     var tourSchedules: MutableList<Schedule> = mutableListOf()
-    var lastModifiedDateTime: String = ""// FIXME 앱 실행되는 region에 따라 파싱하는 DateTime 으로 변경 필요
+    var lastModifiedDateTime: String = ""
 
     fun tabTexts() = tourSchedules.map { "${it.day} (${it.date})" }
 
@@ -29,6 +34,18 @@ object SharedData {
         tourSchedules.addAll(tourScheduleData.schedules)
 
         lastModifiedDateTime = tourScheduleData.lastModifiedDateTime
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun formattedLastModifiedDateTime(): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val parsedDate: Date = dateFormat.parse(lastModifiedDateTime)
+
+        val uiDateFormat = SimpleDateFormat("yyyy년 M월 d일 H시 m분 s초")
+        uiDateFormat.timeZone = TimeZone.getDefault()
+
+        return uiDateFormat.format(parsedDate)
     }
 }
 
@@ -51,6 +68,7 @@ class PlaceholderFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,7 +98,8 @@ class PlaceholderFragment : Fragment() {
 
                 if (activeNetwork != null && activeNetwork.isConnected) {
                     refreshTourSchedules()
-                    Snackbar.make(view!!, "${SharedData.lastModifiedDateTime} 시간 데이터로 업데이트했습니다.", Snackbar.LENGTH_LONG).show()
+
+                    Snackbar.make(view!!, "${SharedData.formattedLastModifiedDateTime()} 데이터로 업데이트했습니다.", Snackbar.LENGTH_LONG).show()
                 } else {
                     Snackbar.make(view!!, "네트워크에 연결할 수 없습니다.", Snackbar.LENGTH_LONG).show()
                 }
