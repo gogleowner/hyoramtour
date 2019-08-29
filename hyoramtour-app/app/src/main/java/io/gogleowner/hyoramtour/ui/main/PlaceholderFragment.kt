@@ -45,7 +45,7 @@ object SharedData {
         val uiDateFormat = SimpleDateFormat("yyyy년 M월 d일 H시 m분 s초")
         uiDateFormat.timeZone = TimeZone.getDefault()
 
-        return uiDateFormat.format(parsedDate)
+        return "${uiDateFormat.format(parsedDate)} (${TimeZone.getDefault().displayName})"
     }
 }
 
