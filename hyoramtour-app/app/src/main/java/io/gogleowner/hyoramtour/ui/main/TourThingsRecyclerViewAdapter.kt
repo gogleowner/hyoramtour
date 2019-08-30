@@ -36,19 +36,25 @@ class TourThingsRecyclerViewAdapter(private val tourThings: List<TourThing>)
     override fun onBindViewHolder(viewHolder: TourThingViewHolder, position: Int) {
         val tourThing = copiedTourThings[position]
 
-        if (tourThing.title.isNotBlank()) {
-            viewHolder.titleTextView.text = tourThing.title
-        } else {
-            viewHolder.titleTextView.visibility = View.GONE
-        }
+        if (tourThing.description.isNotBlank()) {
 
-        viewHolder.descriptionTextView.text = tourThing.description
-        viewHolder.themeImageView.setImageResource(ThemeImage.getResource(tourThing.theme))
+            if (tourThing.title.isNotBlank()) {
+                viewHolder.titleTextView.text = tourThing.title
+            } else {
+                viewHolder.titleTextView.visibility = View.GONE
+            }
 
-        if (tourThing.contentTheme.isNotBlank()) {
-            viewHolder.contentImageView.setImageResource(ThemeImage.getResource(tourThing.contentTheme))
+            viewHolder.descriptionTextView.text = tourThing.description
+            viewHolder.themeImageView.setImageResource(ThemeImage.getResource(tourThing.theme))
+
+            if (tourThing.contentTheme.isNotBlank()) {
+                viewHolder.contentImageView.setImageResource(ThemeImage.getResource(tourThing.contentTheme))
+            } else {
+                viewHolder.contentImageView.visibility = View.GONE
+            }
+
         } else {
-            viewHolder.contentImageView.visibility = View.GONE
+            viewHolder.invisibleViews()
         }
     }
 
@@ -63,6 +69,13 @@ class TourThingsRecyclerViewAdapter(private val tourThings: List<TourThing>)
         val contentImageView: ImageView = itemView.findViewById(R.id.content_image)
         val titleTextView: TextView = itemView.findViewById(R.id.title)
         val descriptionTextView: TextView = itemView.findViewById(R.id.thing_description)
+
+        fun invisibleViews() {
+            themeImageView.visibility = View.GONE
+            titleTextView.visibility = View.GONE
+            contentImageView.visibility = View.GONE
+            descriptionTextView.visibility = View.GONE
+        }
     }
 
     private enum class ThemeImage(private val resource: Int) {
