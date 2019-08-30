@@ -47,6 +47,7 @@
                   android:layout_height="wrap_content"
                   android:id="@+id/thing_description"
                   android:text="description"
+                  android:autoLink="web"
         />
 
     </LinearLayout>
