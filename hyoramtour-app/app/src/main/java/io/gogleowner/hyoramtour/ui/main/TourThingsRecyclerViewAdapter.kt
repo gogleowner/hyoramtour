@@ -36,7 +36,7 @@ class TourThingsRecyclerViewAdapter(private val tourThings: List<TourThing>)
     override fun onBindViewHolder(viewHolder: TourThingViewHolder, position: Int) {
         val tourThing = copiedTourThings[position]
 
-        if (tourThing.description.isNotBlank()) {
+        if (tourThing.title.isNotBlank() || tourThing.description.isNotBlank()) {
 
             if (tourThing.title.isNotBlank()) {
                 viewHolder.titleTextView.text = tourThing.title
