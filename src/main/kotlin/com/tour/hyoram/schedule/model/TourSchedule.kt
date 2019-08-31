@@ -1,5 +1,7 @@
 package com.tour.hyoram.schedule.model
 
+import java.math.BigDecimal
+
 /*
 [
 	{
@@ -45,7 +47,9 @@ data class Schedule(
     val rememberThings: String,
     val room: String) {
 
-    var cost: Double = 0.0
+    private var costAsBigDecimal = BigDecimal.ZERO
+    val cost: Double
+    get() = costAsBigDecimal.toDouble()
 
     val dailySchedules: MutableList<DailySchedule> = mutableListOf()
 
@@ -54,7 +58,9 @@ data class Schedule(
     }
 
     fun addCost(costAsString: String) {
-        cost += if (costAsString.isNotBlank()) costAsString.toDouble() else 0.0
+        if (costAsString.isNotBlank()) {
+            costAsBigDecimal += costAsString.toBigDecimal()
+        }
     }
 }
 
@@ -72,7 +78,7 @@ data class DailySchedule(val timeUnit: String) {
     )
 }
 
-enum class Theme(val korean: String, emoticon: String = "") {
+enum class Theme(val korean: String) {
     /*테마 : 비행 , 버스 , 기차 , 자유 , 투어 , 쇼핑*/
     FLIGHT("비행"),
     BUS("버스"),
@@ -85,7 +91,7 @@ enum class Theme(val korean: String, emoticon: String = "") {
     ;
 
     companion object {
-        private val themeByKoreanMap = values().associateBy({ it.korean }, { value -> value })
+        private val themeByKoreanMap = values().associateBy({ it.korean }, { it })
 
         fun themeByKorean(korean: String): Theme {
             return themeByKoreanMap.getValue(korean)
